@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="estilos.css" media="screen"/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="" type="text/html" href="footer.html" media="screen"/>
+    <meta charset="utf-8">
+    <title>Servicios</title>
+  </head>
+  <body>
+    <div class="box">
+    <h1>Deseos</h1>
+    <form action="javascript:deseosHttp();">
+        <h5>Ingresa un nombre:  </h5>
+      <input type="text" id="nombre" placeholder="Nombre">
+      <h5>Que desearias que pasara:</h5>
+      <input type="text" id="deseo" placeholder="Tu deseo"><br><br>
+        <button  class="button" type="submit">Generar</button>
+      </div>
+      <iframe src="footer.html" frameborder="0">
+    </iframe>
+    </form>
+    <script>
+      
+      async function deseosHttp() {
+        try {
+          
+          const respuestaHttp =
+            await fetch("generar?nombre="
+             
+              + encodeURIComponent(nombre.value.trim())
+          
+              + "&deseo=" + encodeURIComponent(deseo.value.trim()));
+          
+          if (respuestaHttp.ok) {
+            
+            const texto = await respuestaHttp.text();
+            alert(texto);
+          } else {
+            
+            throw new Error(respuestaHttp.statusText)
+          }
+        } catch (e) {
+          alert(e.message)
+        }
+      }
+    </script>
+    
+  </body>
+</html>
